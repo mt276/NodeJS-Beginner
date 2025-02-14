@@ -1,0 +1,4 @@
+npm install express
+npm install ejs
+npm install dotenv
+npm install --save-exact dotenv@16.4.7
