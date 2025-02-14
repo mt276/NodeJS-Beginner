@@ -1,2 +1,0 @@
-//chạy lại server khi lưu
-npm install --save-dev nodemon

@@ -1,32 +1,29 @@
 //import express from `express`; //es modules
+require(`dotenv`).config(); //dotenv
 const express = require(`express`); //node.js
 const path = require(`path`); //commonjs
-require(`dotenv`).config(); //dotenv
+const configViewEngine = require('./config/viewEngine');
+const webRoutes = require('./routes/web');
+const connection = require('./config/database')
 
 const app = express();//app express
-const port = process.env.PORT || 8081; //port => hardcode 
-// các môi trường: .dev .uat .production 
+const port = process.env.PORT || 8081;
 const hostname = process.env.HOST_NAME;
 
 //config teamplate engine
-app.set('views', path.join(__dirname, 'views'))
-app.set('view engine', 'ejs')
+configViewEngine(app);
 
-//config static files
-app.use(express.static(path.join(__dirname, 'public')));
 //khai báo route
-app.get('/', (req, res) => {
-    res.send('Hello world 2')
-})
+app.use('/', webRoutes)
 
-app.get('/abc', (req, res) => {
-    res.send('Check ABC')
-})
-
-//view động
-app.get('/sample', (req, res) => {
-    res.render('sample.ejs')
-})
+//test connection
+connection.query(
+    'SELECT * FROM `Users` u',
+    function (err, results, fields) {
+        console.log(`>>>results`, results);
+        console.log(`fields`, fields);
+    }
+)
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
