@@ -10,6 +10,7 @@
 <body>
     <div class="topnav">
         <a class="active" href="/">Home</a>
+        <a href="/sample">Test</a>
         <a href="/create">Create Users</a>
     </div>
     <div class="table-container">
@@ -40,8 +41,8 @@
                             <%=user.city %>
                         </td>
                         <td>
-                            <button class="edit">Edit</button>
-                            <button class="delete">Delete</button>
+                            <button class="edit" onclick="putUpdateUser(this)">Edit</button>
+                            <button class="delete" onclick="deleteUserForId(this)">Delete</button>
                         </td>
                     </tr>
                     <% }); %>
@@ -49,5 +50,6 @@
         </table>
     </div>
 </body>
+<script src="./js/home.js"></script>
 
 </html>

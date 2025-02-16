@@ -10,7 +10,7 @@ const createUser = async (name, email, city) => {
     return results;
 }
 
-const updateUser = async (id, name, email, city) => {
+const updateUser = async (name, email, city, id) => {
     let [results, fields] = await connection.query(`UPDATE Users SET email = ?, name = ?, city = ? WHERE id = ?`, [name, email, city, id]);
     return results;
 }
@@ -20,9 +20,15 @@ const deleteUser = async (id) => {
     return results;
 }
 
+const getUserById = async (id) => {
+    let [results, fields] = await connection.query(`SELECT * FROM Users WHERE id=?`, [id]);
+    return results;
+}
+
 module.exports = {
     getAllUsers,
     createUser,
     updateUser,
-    deleteUser
+    deleteUser,
+    getUserById
 }
